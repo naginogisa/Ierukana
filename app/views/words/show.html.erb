@@ -1,0 +1,13 @@
+<tr>
+  <td><%= @word.word %></td>
+</tr>
+<tr>
+  <td><%= render 'words/tag_list', tag_list: @word.tag_list %></td>
+</tr>
+<tr>
+  <td><%= @word.user.name %></td>
+</tr>
+<tr>
+  <td><%= link_to'早口言葉編集',edit_word_path(@word.id) %></td>
+  <td><%= link_to '削除',word_path(@word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
+</tr>

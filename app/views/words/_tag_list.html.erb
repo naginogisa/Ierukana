@@ -1,0 +1,4 @@
+<% tag_list.each do |tag| %>
+  <span style="background-color: #e9e9e9; border-radius: 5px;"><%= link_to tag, words_path(tag_name: tag), class: "text-white" %></span>
+  
+<% end %>

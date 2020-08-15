@@ -10,6 +10,37 @@
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="collapse navbar-collapse" id="navbarEexample1">
+          <ul class="nav navbar-nav navbar-right"> 
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to 'マイページ', user_path(current_user.id) %>
+              </li>
+              <li>
+                <%= link_to '新着一覧', words_path %>
+              </li>
+              <li>
+                <%= link_to '投稿', new_word_path %>
+              </li>
+              <li>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to '新規登録', new_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to 'ログイン', new_user_session_path %>
+              </li>
+            <% end %> 
+          </ul>
+        </div>
+      </div>
+    </div>    
+    </nav>
+      <%= yield %>
+</body>
 </html>
