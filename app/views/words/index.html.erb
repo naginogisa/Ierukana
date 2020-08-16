@@ -1,0 +1,15 @@
+<h1>新作一覧</h1>
+<% @words.each do |word| %>
+<table class= "table">
+    <tr>
+      <td><%= link_to word.word , word_path(word.id) %></td>
+    </tr>
+    <tr>
+      <td><%= render 'words/tag_list', tag_list: word.tag_list %></td>
+    </tr>
+    <tr>
+      <td><%= word.user.name %></td>
+      <td>コメント<%= word.comments.count %>件</td>
+    </tr>
+    </table>
+<% end %>

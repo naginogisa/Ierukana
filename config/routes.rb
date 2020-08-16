@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'words#index'
   resources :users, only: [:show, :edit, :update]
-  resources :words
   get 'users/rank' => 'users#rank', as:'users_rank'
+  resources :words do
+    resources :comments, only: [:create, :destroy]
+  end
 end
