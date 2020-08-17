@@ -79,3 +79,5 @@ end
 
 gem 'ed25519'
 gem 'bcrypt_pbkdf'
+gem 'ransack'
+gem 'kaminari','~> 1.2.1'

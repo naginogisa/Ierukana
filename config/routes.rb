@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   get 'users/rank' => 'users#rank', as:'users_rank'
   resources :words do
-    resources :comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :edit, :update]
   end
 end

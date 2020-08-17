@@ -1,0 +1,11 @@
+<h1>Editing comment</h1>
+<%= form_for @comment,:url => {:action => :update} do |f| %>
+  <div class=field>
+    <label>コメント</label>
+    <%= f.text_area :comment %><br>
+  </div>
+  <div class=actions>
+    <%= f.submit 'Update comment' %><br>
+  </div>
+<% end %>
+<%= link_to "戻る", word_path(@comment.word) %>

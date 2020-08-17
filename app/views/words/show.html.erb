@@ -1,41 +1,48 @@
-<table class="table">
-  <tr>
-    <td><%= @word.word %></td>
-  </tr>
-  <tr>
-    <td><%= render 'words/tag_list', tag_list: @word.tag_list %></td>
-  </tr>
-  <tr>
-    <td><%= @word.user.name %></td>
-  </tr>
-  <tr>
-    <td><%= link_to'早口言葉編集',edit_word_path(@word.id) %></td>
-    <td><%= link_to '削除',word_path(@word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
-  </tr>
- 
-</table>
-
-<table class="table">
-<tbody>
-  <tr>
-    <h3>コメント一覧</h3>
-    <% @word.comments.each do |comment| %>
-      <tr>
+<div class="col-xs-5"> 
+<h1>作品詳細</h1>
+  <table class="table">
+    <tr>
+      <td><%= @word.word %></td>
+    </tr>
+    <tr>
+      <td><%= render 'words/tag_list', tag_list: @word.tag_list %></td>
+    </tr>
+    <tr>
+      <td><%= @word.user.name %></td>
       <td>
-        <%= attachment_image_tag(comment.user, :image, :fill, 30, 30, fallback: "no_image.jpg") %>
-        <p><%= comment.user.name %></p>
+        <div class="favorites_buttons_<%= @word.id %>">
+           <%= render partial: 'favorites/favorite', locals: { word: @word} %>
+        </div>
       </td>
-      <td><%= comment.comment %></td>
-      <% if comment.user == current_user %>
-      <td><%= link_to '削除',word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tr>
- </tbody>
-</table>
+    </tr>
+  </table>
 
-  <%= form_for [@word, @comment] do |f| %>
-    <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
-    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-  <% end %>
+  <table class="table">
+  <tbody>
+    <tr>
+      <h3>コメント一覧</h3>
+      <td><% @word.comments.each do |comment| %></td>
+      
+      </td>
+    </tr>
+        <tr>  
+        <td>
+          <%= attachment_image_tag(comment.user, :image, :fill, 30, 30, fallback: "no_image.jpg") %>
+          <p><%= comment.user.name %></p>
+        </td>
+        <td><%= comment.comment %></td>
+        <% if comment.user == current_user %>
+        <td> <%= link_to "Edit", edit_word_comment_path(comment.word, comment),class: "btn-sm btn-success" %></td>
+        <td><%= link_to '削除',word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tr>
+  </tbody>
+  </table>
+
+    <%= form_for [@word, @comment] do |f| %>
+      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
+      <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
+</div>

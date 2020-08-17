@@ -1,5 +1,8 @@
-<h1>ユーザー情報一覧</h1>
-
+<% if @user == current_user %>
+<h1>マイページ</h1>
+<% else %>
+<h1>ユーザー情報</h1>
+<% end %>
 <div class="col-xs-5">
   <h2>User info</h2>
   <p><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></p>
@@ -19,4 +22,26 @@
       </tr>
     </tbody>
   </table>
-</div>
+
+<h2>投稿作品</h2>
+<% @user.words.each do |word| %>
+  <table class= "table">
+      <tr>
+        <td><%= link_to word.word , word_path(word.id) %></td>
+      </tr>
+      <tr>
+        <td><%= render 'words/tag_list', tag_list: word.tag_list %></td>
+      </tr>
+      <tr>
+        <td><%= word.user.name %></td>
+        <td>コメント<%= word.comments.count %>件</td>
+      </tr>
+      <% if word.user == current_user %>
+        <tr>
+          <td><%= link_to'早口言葉編集',edit_word_path(word.id),class: "btn-sm btn-success"  %></td>
+          <td><%= link_to '削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
+        </tr>
+      <% end %>
+      </table>
+  <% end %>
+  </div>

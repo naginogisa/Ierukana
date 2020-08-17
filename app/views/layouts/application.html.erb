@@ -35,7 +35,16 @@
               <li>
                 <%= link_to 'ログイン', new_user_session_path %>
               </li>
-            <% end %> 
+            <% end %>
+              <li>
+                <p>早口言葉検索</p>  
+              </li>
+              <li>
+              <%= search_form_for @search, url: words_path  do |f| %>
+                <%= f.text_field :word_cont, placeholder: 'キーワードを入力...' %>
+                <%= f.submit ("検索する"), name: nil %>
+              <% end %>
+              </li>
           </ul>
         </div>
       </div>

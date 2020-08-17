@@ -6,9 +6,19 @@ class CommentsController < ApplicationController
     @comment.save
     redirect_to word_path(@word.id)
   end
+  def edit
+    @comment = Comment.find_by(word_id: params[:word_id], id: params[:id])
+  end
+
+  def update
+    @comment = Comment.find_by(id: params[:id], word_id: params[:word_id])
+    @comment.update(comment_params)
+    redirect_to word_path(@comment.word.id)
+  end
+
   def destroy
-    BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_to book_path(params[:book_id])  
+    Comment.find_by(id: params[:id], word_id: params[:word_id]).destroy
+    redirect_to word_path(params[:word_id])  
   end
 
   private
