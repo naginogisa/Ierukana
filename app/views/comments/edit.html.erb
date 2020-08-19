@@ -1,5 +1,19 @@
 <h1>Editing comment</h1>
 <%= form_for @comment,:url => {:action => :update} do |f| %>
+  <div class="form-group row" id="star">
+  <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+  <%= f.hidden_field :rate, id: :review_star %>
+</div>
+<script>
+$('#star').raty({
+  size     : 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  scoreName: 'comment[rate]',
+  half: true,
+});
+</script>  
   <div class=field>
     <label>コメント</label>
     <%= f.text_area :comment %><br>

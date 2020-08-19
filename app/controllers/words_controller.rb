@@ -1,10 +1,15 @@
 class WordsController < ApplicationController
+  before_action :authenticate_user!
   def index
     if params[:tag_name]
       @words = Word.tagged_with("#{params[:tag_name]}")
     else
       @words = Word.all
     end
+  end
+
+  def rank
+    @all_ranks = Word.find(Favorite.group(:word_id).order('count(word_id) desc').limit(10).pluck(:word_id))
   end
 
   def new
