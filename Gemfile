@@ -69,7 +69,6 @@ gem 'devise'
 gem 'activeadmin'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'dotenv-rails'

@@ -1,72 +1,73 @@
-<div class="col-xs-5"> 
-<h1>作品詳細</h1>
-  <table class="table">
-    <tr>
-    
+
+<h1 class="title">作品詳細</h1>
+<div class="content">
+  <table class="content__table">
+    <tr class="content__table-row">
     </tr>
-    <tr>
-      <td><%= @word.word %></td>
-    </tr>
-    <tr>
-      <td><%= render 'words/tag_list', tag_list: @word.tag_list %></td>
-    </tr>
-    <tr>
-      <td><%= @word.user.name %></td>
-      <td>
-        <div class="favorites_buttons_<%= @word.id %>">
-           <%= render partial: 'favorites/favorite', locals: { word: @word} %>
+    <tr class="content__table-row">
+      <td class="content__table-word">
+        <%= @word.word %>
+        <br>
+        <div class="content__table-user">
+          作者：<%= link_to @word.user.name, user_path(@word.user.id),class: "link" %>
         </div>
       </td>
     </tr>
-  </table>
-
-  <table class="table">
-  <tbody>
-    <tr>
-      <h3>コメント一覧</h3>
-
-      <td><% @word.comments.each do |comment| %></td>
-      
-      </td>
+    <tr class="content__table-row">
+      <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: @word.tag_list %></td>
+     
     </tr>
-        <tr>  
-        <td>
-          <%= attachment_image_tag(comment.user, :image, :fill, 30, 30, fallback: "no_image.jpg") %>
-          <p><%= comment.user.name %></p>
-        </td>
-        <td>
-        <h4 class="mb-3">評価：<%= comment.rate %>点
+    <td>
+      <div class="content__table-fav, favorites_buttons_<%= @word.id %>">
+      <%= render partial: 'favorites/favorite', locals: { word: @word} %>
+      </div>
+    </td>
+  </table>
+</div>
+
+<div class="content">
+  <h2>コメント一覧</h2>
+  <table class="content__table">
+  <% @word.comments.each do |comment| %>  
+    <tr class="content__table-row">  
+      <td class="content__table-pic">
+        <%= attachment_image_tag(comment.user, :image, :fill, 70, 70, fallback: "no_image.jpg") %>
+        <p class="content__table-name"><%= link_to comment.user.name, user_path(comment.user.id),class: "user_link" %></p>
       </td>
-        <td>
-        <div id="star-rate-<%= comment.id %>"></div>
+      <td class="content__table-rate">
+        評価：<%= comment.rate %>点
+      </td>
+      <td class="content__table-comment"><%= comment.comment %></td>
+      <% if comment.user == current_user %>
+        <td class="content__table-btn">
+          <%= link_to '編集', edit_word_comment_path(comment.word, comment),class: "up_btn" %>
+          <%= link_to '削除', word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %>
         </td>
-        <td><%= comment.comment %></td>
-        <% if comment.user == current_user %>
-        <td> <%= link_to "Edit", edit_word_comment_path(comment.word, comment),class: "btn-sm btn-success" %></td>
-        <td><%= link_to '削除',word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
-        </tr>
-        <% end %>
       <% end %>
     </tr>
-  </tbody>
+  <% end %>
   </table>
+</div>
 
-    <%= form_for [@word, @comment] do |f| %>
-      <div class="form-group row" id="star">
-      <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+<div class="form">  
+  <%= form_for [@word, @comment] do |f| %>
+    <div class="form-group row" id="star">
+      <%= f.label :rate,'評価 ', class: "rate_font" %>
       <%= f.hidden_field :rate, id: :review_star %>
     </div>
+
     <script>
-    $('#star').raty({
-      size     : 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      scoreName: 'comment[rate]',
-      half: true,
-    });
+      $('#star').raty({ 
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'comment[rate]',
+        half: true,
+      });
     </script>  
-      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
-      <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-    <% end %>
-</div>
+
+    <%= f.text_area :comment, rows:'5', class: "input",placeholder: "コメントをここに" %><br>
+    <%= f.submit "送信する", class: "btn" %>
+  <% end %>
+ </div>

@@ -13,7 +13,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
-//= require bootstrap-sprockets
 //= require_tree .
 /*!
  * jQuery Raty - A Star Rating Plugin

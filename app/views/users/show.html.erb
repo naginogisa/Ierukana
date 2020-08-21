@@ -1,47 +1,49 @@
 <% if @user == current_user %>
-<h1>マイページ</h1>
+  <h1 class="title">マイページ</h1>
 <% else %>
-<h1>ユーザー情報</h1>
+  <h1 class="title">ユーザー情報</h1>
 <% end %>
-<div class="col-xs-5">
-  <h2>User info</h2>
-  <p><%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></p>
-  <table class="table">
-    <tbody>
-      <tr></tr>
-      <tr>
-      <th>name</th>
-      <th><%= @user.name %></th>
-      </tr>
-      <tr>
-        <th>introduction</th>
-        <th><%= @user.introduction %></th>
-      </tr>
-      <tr> 
-        <%= link_to'プロフィール編集',edit_user_path(@user.id) %>
-      </tr>
-    </tbody>
-  </table>
 
-<h2>投稿作品</h2>
-<% @user.words.each do |word| %>
-  <table class= "table">
-      <tr>
-        <td><%= link_to word.word , word_path(word.id) %></td>
+<div class="content">
+  <h2 class="content__title">User info</h2>
+  <table class="content__table">
+      <tr class="content__table-pic"> 
+      <td colspan="2">
+        <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100", class: "pic" %>
+        </td>
       </tr>
-      <tr>
-        <td><%= render 'words/tag_list', tag_list: word.tag_list %></td>
+      <tr class="content__table-row">
+        <th class="content__table-head">name</th>
+        <td class="content__table-txt"><%= @user.name %></td>
       </tr>
-      <tr>
-        <td><%= word.user.name %></td>
-        <td>コメント<%= word.comments.count %>件</td>
+      <tr class="content__table-row">
+        <th class="content__table-head">introduction</th>
+        <td class="content__table-txt"><%= @user.introduction %></td>
       </tr>
-      <% if word.user == current_user %>
-        <tr>
-          <td><%= link_to'早口言葉編集',edit_word_path(word.id),class: "btn-sm btn-success"  %></td>
-          <td><%= link_to '削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "btn-sm btn-danger" %></td>
-        </tr>
-      <% end %>
-      </table>
+      <tr class="content__table-row"> 
+        <td><%= link_to'プロフィール編集',edit_user_path(@user.id),class: "up_btn" %></td>
+      </tr>
+  </table>
+</div>
+
+<div class="content">
+  <h2 class="content__title">投稿作品</h2>
+  <% @user.words.each do |word| %>
+    <table class="content__table">
+      <tr class="content__table-row">
+        <td colspan="2" class="content__table-word"><%= link_to word.word , word_path(word.id),class: "link" %></td>
+      </tr>
+      <tr class="content__table-row">
+        <td class="content__table-tag"><%= render 'words/tag_list', tag_list: word.tag_list %></td>
+      
+        <td class="content__table-text">コメント<%= word.comments.count %>件
+          <% if word.user == current_user %>
+            <%= link_to'投稿作品編集',edit_word_path(word.id),class: "up_btn"  %>
+            <%= link_to '投稿作品削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %></td>
+          <% end %>
+        </td>
+      </tr>
+    </table>
   <% end %>
-  </div>
+</div>
+ 
