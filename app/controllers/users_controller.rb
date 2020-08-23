@@ -5,6 +5,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def favorite
+    @user = User.find_by(id: params[:id])
+    @favorites = Favorite.where(user_id: @user.id)
+    if  @user == current_user
+      render 'favorite'
+    else 
+      redirect_to words_path
+    end
+  end
+
   def edit
     @user = User.find(params[:id])
    if  @user == current_user

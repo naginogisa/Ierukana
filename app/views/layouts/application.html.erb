@@ -4,7 +4,8 @@
     <title>Ierukana</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <script src="https://kit.fontawesome.com/5b6bab02f4.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
@@ -30,8 +31,18 @@
               <%= link_to '投稿', new_word_path,class: "link" %>
             </li>
             <li class="nav__list-item">
+            <%= link_to 'ブックマーク', users_favorite_path(current_user.id),class: "link" %>
+            </li>
+
+            <li class="nav__list-item">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link" %>
             </li>
+            <li class="search"> 
+            <%= search_form_for @search, url: words_result_path  do |f| %>
+              <%= f.text_field :word_cont, placeholder: 'キーワードを入力...', class:"search__input" %>
+              <%= f.submit ("検索する"), name: nil, class:"button" %>
+            <% end %>
+          </li>    
           <% else %>
             <li class="nav__list-item">
               <%= link_to '新規登録', new_user_registration_path,class: "link" %>
@@ -39,17 +50,15 @@
             <li class="nav__list-item">
               <%= link_to 'ログイン', new_user_session_path,class: "link" %>
             </li>
-          <% end %>
-          <li class="search"> 
-          <%= search_form_for @search, url: words_result_path  do |f| %>
-            <%= f.text_field :word_cont, placeholder: 'キーワードを入力...', class:"search__input" %>
-            <%= f.submit ("検索する"), name: nil, class:"button" %>
-          <% end %>
-        </li>           
+          <% end %>       
         </ul>
       </nav>
      
     </header>
+    <main>
     <%= yield %>
-  </body>
+    </main>
+    <footer>
+    </footer>
+    </body>
 </html>

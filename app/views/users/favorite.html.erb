@@ -1,0 +1,12 @@
+<h1 class="title">ブックマーク一覧</h1>
+<div class="content">
+  <% @favorites.each do |favorite| %>
+    <table class="content__table">
+      <tr class="content__table-row">
+        <td colspan="2" class="content__table-word">
+          <%= link_to favorite.word.word , word_path(favorite.word.id),class: "link" %>
+        </td>
+      <tr>
+    </table>
+  <% end %>
+</div>

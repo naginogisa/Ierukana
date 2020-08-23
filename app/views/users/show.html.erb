@@ -6,7 +6,7 @@
 
 <div class="content">
   <h2 class="content__title">User info</h2>
-  <table class="content__table">
+  <table class="content__table, content__table-box">
       <tr class="content__table-pic"> 
       <td colspan="2">
         <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100", class: "pic" %>
@@ -14,15 +14,17 @@
       </tr>
       <tr class="content__table-row">
         <th class="content__table-head">name</th>
-        <td class="content__table-txt"><%= @user.name %></td>
+        <td class="content__table-info"><%= @user.name %></td>
       </tr>
       <tr class="content__table-row">
         <th class="content__table-head">introduction</th>
-        <td class="content__table-txt"><%= @user.introduction %></td>
+        <td class="content__table-info"><%= @user.introduction %></td>
       </tr>
+      <% if @user == current_user %>
       <tr class="content__table-row"> 
         <td><%= link_to'プロフィール編集',edit_user_path(@user.id),class: "up_btn" %></td>
       </tr>
+      <% end %>
   </table>
 </div>
 
@@ -34,7 +36,7 @@
         <td colspan="2" class="content__table-word"><%= link_to word.word , word_path(word.id),class: "link" %></td>
       </tr>
       <tr class="content__table-row">
-        <td class="content__table-tag"><%= render 'words/tag_list', tag_list: word.tag_list %></td>
+        <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: word.tag_list %></td>
       
         <td class="content__table-text">コメント<%= word.comments.count %>件
           <% if word.user == current_user %>

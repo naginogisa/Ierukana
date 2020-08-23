@@ -1,13 +1,14 @@
 <h1 class="title">ブックマークランキング</h1>
 <div class="content">
-  <% @all_ranks.each.with_index(1) do |word, i| %>
+  <% @all_ranks.each.with_index(1) do |rank, i| %>
     <table class= "content__table">
       <tr class="content__table-row">
-        <td class="content__table-word"><%= link_to word.word , word_path(word.id),class: "link" %>
-        <br><div class="content__table-user">作者：<%= link_to word.user.name, user_path(word.user.id),class: "link" %></div></td>
+        <td class="content__table-word">
+          第<%= i %>位<br><%= link_to rank.word , word_path(rank.id),class: "link" %>
+        <br><div class="content__table-user">ブックマーク数<%= rank.favorites.count %>件    作者：<%= link_to rank.user.name, user_path(rank.user.id),class: "link" %></div></td>
       </tr>
       <tr class="content__table-row">
-       <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: word.tag_list,class: "tag" %> </td>
+       <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: rank.tag_list,class: "tag" %> </td>
       </tr>
     </table>
   <% end %>

@@ -5,7 +5,7 @@
     <tr class="content__table-row">
     </tr>
     <tr class="content__table-row">
-      <td class="content__table-word">
+      <td colspan="2"  class="content__table-word">
         <%= @word.word %>
         <br>
         <div class="content__table-user">
@@ -16,32 +16,33 @@
     <tr class="content__table-row">
       <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: @word.tag_list %></td>
      
-    </tr>
+   
     <td>
       <div class="content__table-fav, favorites_buttons_<%= @word.id %>">
       <%= render partial: 'favorites/favorite', locals: { word: @word} %>
       </div>
     </td>
+    </tr>
   </table>
 </div>
 
-<div class="content">
+<div class="comment">
   <h2>コメント一覧</h2>
-  <table class="content__table">
+  <table class="comment__table">
   <% @word.comments.each do |comment| %>  
-    <tr class="content__table-row">  
-      <td class="content__table-pic">
+    <tr class="comment__table-row">  
+      <td class="comment__table-pic">
         <%= attachment_image_tag(comment.user, :image, :fill, 70, 70, fallback: "no_image.jpg") %>
-        <p class="content__table-name"><%= link_to comment.user.name, user_path(comment.user.id),class: "user_link" %></p>
+        <p class="comment__table-name"><%= link_to comment.user.name, user_path(comment.user.id),class: "user_link" %></p>
       </td>
-      <td class="content__table-rate">
+      <td class="comment__table-rate">
         評価：<%= comment.rate %>点
       </td>
-      <td class="content__table-comment"><%= comment.comment %></td>
+      <td class="comment__table-comment"><%= comment.comment %></td>
       <% if comment.user == current_user %>
-        <td class="content__table-btn">
-          <%= link_to '編集', edit_word_comment_path(comment.word, comment),class: "up_btn" %>
-          <%= link_to '削除', word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %>
+        <td class="comment__table-btn">
+          <%= link_to 'コメント編集', edit_word_comment_path(comment.word, comment),class: "up_btn" %>
+          <%= link_to 'コメント削除', word_comment_path(comment.word, comment), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %>
         </td>
       <% end %>
     </tr>
