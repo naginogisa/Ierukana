@@ -73,7 +73,7 @@ gem 'jquery-rails'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'dotenv-rails'
 group :production do
-  gem 'mysql2'
+  gem 'mysql2', '~>0.5.3'
 end
 
 gem 'ed25519'

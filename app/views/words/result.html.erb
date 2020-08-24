@@ -3,15 +3,13 @@
 <% @search_words.each do |word| %>
   <table class= "content__table">
     <tr class="content__table-row">
-      <td class="content__table-word">
+      <td colspan="3" class="content__table-word">
         <%= link_to word.word , word_path(word.id),class: "link" %>
         <br><div class="content__table-user">作者：<%= link_to word.user.name, user_path(word.user.id),class: "link" %></div>
       </td>
     </tr>
     <tr class="content__table-row">
       <td class="content__table-tag"><%= render 'words/tag_list', tag_list: word.tag_list,class: "tag" %></td>
-    </tr>
-    <tr>
       <td>
         <div class="favorites_buttons_<%= word.id %>">
           <%= render partial: 'favorites/favorite', locals: { word: word} %>
