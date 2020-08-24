@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-
   before_action :set_word
 
   def create

@@ -30,7 +30,7 @@
 
 <div class="content">
   <h2 class="content__title">投稿作品</h2>
-  <% @user.words.each do |word| %>
+  <% @words.each do |word| %>
     <table class="content__table">
       <tr class="content__table-row">
         <td colspan="2" class="content__table-word"><%= link_to word.word , word_path(word.id),class: "link" %></td>
@@ -38,14 +38,16 @@
       <tr class="content__table-row">
         <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: word.tag_list %></td>
       
-        <td class="content__table-text">コメント<%= word.comments.count %>件
+        <td align="right" class="content__table-text">コメント<%= word.comments.count %>件
           <% if word.user == current_user %>
             <%= link_to'投稿作品編集',edit_word_path(word.id),class: "up_btn"  %>
-            <%= link_to '投稿作品削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %></td>
+            <%= link_to '投稿作品削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %>
           <% end %>
+        </td>
         </td>
       </tr>
     </table>
   <% end %>
+  <%= paginate @words %>
 </div>
  

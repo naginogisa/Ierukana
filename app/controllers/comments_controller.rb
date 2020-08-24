@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @comment.save
     redirect_to word_path(@word.id)
   end
+
   def edit
     @comment = Comment.find_by(word_id: params[:word_id], id: params[:id])
   end
@@ -18,10 +19,11 @@ class CommentsController < ApplicationController
 
   def destroy
     Comment.find_by(id: params[:id], word_id: params[:word_id]).destroy
-    redirect_to word_path(params[:word_id])  
+    redirect_to word_path(params[:word_id])
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:comment, :rate)
   end
