@@ -32,6 +32,28 @@ header{
   background-position: top center;
 }
 
+.about{
+  background-color: #cae7f5ce;
+  width: 60%;
+  margin: 0 auto;
+  border: solid;
+  border-radius: 15px;
+  border-width: 5px;
+  border-color: #848de2;
+  margin-bottom: 100px;
+  text-align: center;
+    &__title{
+      font-size: 50px;
+    }
+    &__detail{
+    font-size: 20px;
+    }
+    &__strong{
+    font-size: 30px;
+    margin: 20px;
+    }    
+}
+
 .nav{
   font-size: 25px;
  

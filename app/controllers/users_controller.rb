@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:about]
 
   def show
     @user = User.find(params[:id])
@@ -14,6 +14,9 @@ class UsersController < ApplicationController
     else
       redirect_to words_path
     end
+  end
+  def about
+  
   end
 
   def edit

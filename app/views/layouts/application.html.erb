@@ -19,7 +19,7 @@
         <ul class="nav__list"> 
           <% if user_signed_in? %>
             <li class="nav__list-item">
-              <%= link_to 'マイページ', user_path(current_user.id),class: "link" %>
+              <%= link_to '投稿', new_word_path,class: "link" %>
             </li>
             <li class="nav__list-item">
               <%= link_to '新着一覧', words_path,class: "link" %>
@@ -28,12 +28,11 @@
               <%= link_to 'ランキング', words_rank_path,class: "link" %>
             </li>
             <li class="nav__list-item">
-              <%= link_to '投稿', new_word_path,class: "link" %>
+              <%= link_to 'マイページ', user_path(current_user.id),class: "link" %>
             </li>
             <li class="nav__list-item">
-            <%= link_to 'ブックマーク', users_favorite_path(current_user.id),class: "link" %>
+              <%= link_to 'ブックマーク', users_favorite_path(current_user.id),class: "link" %>
             </li>
-
             <li class="nav__list-item">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: "link" %>
             </li>
@@ -50,6 +49,9 @@
             <li class="nav__list-item">
               <%= link_to 'ログイン', new_user_session_path,class: "link" %>
             </li>
+            <li class="nav__list-item">
+            <%= link_to 'about', users_about_path,class: "link" %>
+          </li>
           <% end %>       
         </ul>
       </nav>
