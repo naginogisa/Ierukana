@@ -7,4 +7,5 @@ class Word < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
+  validates :word, presence: true
 end
