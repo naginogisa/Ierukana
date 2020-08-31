@@ -1,18 +1,12 @@
-<h1>早口言葉編集</h1>
-<%= form_for(@word) do |f| %>
-
-  <div class=field>
-    <label>早口言葉</label>
-    <%= f.text_field :word %>
-  </div>        
-  
-  <div class=field>
-    <label>タグ</label>
+<h1 class="title">早口言葉編集</h1>
+<div class="form">
+  <%= form_for(@word) do |f| %>
+    <p class="form__label">早口言葉</p>
+    <%= f.text_field :word, class: "input" %>        
+    <p class="form__label">タグ</p>
     <%= f.text_field :tag_list, value: @word.tag_list.join(','), class: "col-xs-9" %>
-  </div>
-  
-  <div class=actions>
-    <%= f.submit 'Update User' %><br>
-  </div>
-  
+    <div class=actions>
+      <%= f.submit 'Update Word',class: "btn" %><br>
+    </div>
   <% end %>
+</div>
