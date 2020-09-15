@@ -22,7 +22,7 @@
           <td class="content__table-tag">
             タグ：<%= render 'words/tag_list', tag_list: word.tag_list,class: "tag" %>
           </td>
-          <td align="right" class="content__table-count">
+          <td class="content__table-count right" >
             コメント<%= word.comments.count %>件
             <span align="right" class="favorites_buttons_<%= word.id %>">
               <%= render partial: 'favorites/favorite', locals: { word: word} %>

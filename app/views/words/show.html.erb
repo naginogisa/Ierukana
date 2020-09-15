@@ -17,7 +17,7 @@
       <td class="content__table-tag">
         タグ：<%= render 'words/tag_list', tag_list: @word.tag_list %>
       </td> 
-      <td align="right">
+      <td class="right">
         <div class="content__table-fav, favorites_buttons_<%= @word.id %>">
         <%= render partial: 'favorites/favorite', locals: { word: @word} %>
         </div>

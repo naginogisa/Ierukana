@@ -10,7 +10,7 @@
     </tr>
     <tr class="content__table-row">
       <td class="content__table-tag"><%= render 'words/tag_list', tag_list: word.tag_list,class: "tag" %></td>
-      <td align="right">
+      <td class="right">
         コメント<%= word.comments.count %>件
         <span class="favorites_buttons_<%= word.id %>">
           <%= render partial: 'favorites/favorite', locals: { word: word} %>

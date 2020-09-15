@@ -38,7 +38,7 @@
       <tr class="content__table-row">
         <td class="content__table-tag">タグ：<%= render 'words/tag_list', tag_list: word.tag_list %></td>
       
-        <td align="right" class="content__table-text">コメント<%= word.comments.count %>件
+        <td class="content__table-text right">コメント<%= word.comments.count %>件
           <% if word.user == current_user %>
             <%= link_to'投稿作品編集',edit_word_path(word.id),class: "up_btn"  %>
             <%= link_to '投稿作品削除',word_path(word), method: :delete,data: {confirm:'削除してもよろしいですか？'},class: "d_btn" %>
